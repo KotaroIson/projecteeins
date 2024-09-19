@@ -1,0 +1,2 @@
+#header {width:100%; height: 160px; background-color: rgb(16, 25, 58); color: white; font-family: 'Noto Sans', 'Lilita One', 'Roboto', sans-serif; position: fixed; margin-top: -22px; margin-left: -8px; z-index: 2;}
+#contact {align-items: flex-end; height: 100px; width: 100px; margin-left: 80%; position: relative; top:165px; text-decoration: none;}
