@@ -23,9 +23,9 @@
                 <button class="tablinks" onclick="openTable(event, 'Names')">Names</button>
               </div>
               <div id="Groups" class="tabcontent">
-                <h3>Groups</h3>
-                <table border='1'>
-                    <tr><th>Ранг</th><th>Название</th></tr>
+                <h2 class="ns" style="text-align: center;">Groups</h2>
+                <table border='1' id="sorty">
+                    <tr><th onclick="sortn(0)">Ранг</th><th onclick="sort(1)">Название</th></tr>
                     <tr><td>1</td><td>The Semicolon Forgetters</td></tr>
                     <tr><td>2</td><td>Rising Stars</td></tr>
                     <tr><td>3</td><td>GatitoCatito</td></tr>
@@ -50,9 +50,9 @@
               </div>
               
               <div id="Names" class="tabcontent">
-                <h3>Names</h3>
-                <table border='1'>
-                    <tr><th>Имя</th><th>Возраст</th><th>Команда</th></tr>
+                <h2 class="ns" style="text-align: center;">Names</h3>
+                <table border='1' id="sorty1">
+                    <tr><th onclick="sort1(0)">Имя</th><th onclick="sortn1(1)">Возраст</th><th onclick="sort1(2)">Команда</th></tr>
                     <tr><td>Ахмет Ролан</td><td>16</td><td>The Semicolon Forgetters</td></tr>
                     <tr><td>Данияров Максат</td><td>18</td><td>WahhWahh</td></tr>
                     <tr><td>Сырымов Айторе</td><td>17</td><td>Синий Трактор</td></tr>
