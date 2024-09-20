@@ -32,7 +32,15 @@
 .table tbody tr:nth-child(even){
 	background: #f8f8f8!important;
 }
-
+.tab {
+    padding-top: 250px;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: -250px;
+  }
 
   .tab button {
     background-color: inherit;
