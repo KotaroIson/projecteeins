@@ -13,7 +13,7 @@ function openTable(evt, tableName) {
 }
 function sortn(n) {
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-  table = document.getElementById("sorty");
+  table = document.getElementById("MyTable");
   switching = true;
   dir = "asc";
   while (switching) {
@@ -41,7 +41,7 @@ function sortn(n) {
               switching = true;}}}}
 function sort(n) {
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-  table = document.getElementById("sorty");
+  table = document.getElementById("MyTable");
   switching = true;
   dir = "asc";
   while (switching) {

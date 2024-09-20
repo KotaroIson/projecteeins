@@ -10,6 +10,84 @@
     <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
     <link href="tablecss.css" rel="stylesheet"/>
     <script src="tables.js"></script>
+    <script>
+      function searchTable(tableId, inputId) {
+    var input, filter, table, tr, td, i, j, txtValue;
+    input = document.getElementById(inputId);
+    filter = input.value.toUpperCase();
+    table = document.getElementById(tableId);
+    tr = table.getElementsByTagName("tr");
+
+    for (i = 1; i < tr.length; i++) { // Skip the header row
+        tr[i].style.display = "none"; // Initially hide all rows
+        td = tr[i].getElementsByTagName("td");
+        for (j = 0; j < td.length; j++) { // Loop through all columns
+            if (td[j]) {
+                txtValue = td[j].textContent || td[j].innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = ""; // Show the row if match is found
+                    break; // Exit loop if a match is found in any column
+                }
+            }
+        }
+    }
+}
+
+// JavaScript function to sort table based on column index
+function sortTable(tableId, colIndex) {
+    var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+    table = document.getElementById(tableId);
+    switching = true;
+    dir = "asc"; // Set the sorting direction to ascending initially
+
+    while (switching) {
+        switching = false;
+        rows = table.rows;
+        for (i = 1; i < (rows.length - 1); i++) { // Skip the header row
+            shouldSwitch = false;
+            x = rows[i].getElementsByTagName("TD")[colIndex];
+            y = rows[i + 1].getElementsByTagName("TD")[colIndex];
+
+            if (dir == "asc") {
+                if (isNaN(x.innerHTML)) { // If column data is text, compare as strings
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                } else { // If column data is numeric, compare as numbers
+                    if (Number(x.innerHTML) > Number(y.innerHTML)) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+            } else if (dir == "desc") {
+                if (isNaN(x.innerHTML)) {
+                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                } else {
+                    if (Number(x.innerHTML) < Number(y.innerHTML)) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (shouldSwitch) {
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+            switchcount++;
+        } else {
+            if (switchcount == 0 && dir == "asc") {
+                dir = "desc";
+                switching = true;
+            }
+        }
+    }
+}
+      </script>
 </head>
 <body>
     <div id="header">
@@ -18,14 +96,18 @@
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/1200px-Telegram_logo.svg.png" id="contact">
             </a></div>
             <h1 class="ns" style="text-align: center; font-size: 50px; padding-top: 200px;">Выберите вкладку</h1>
+            <p class="ns" style="text-align: center; font-size: 35px;">Нажмите на название ряда для сортировки по возрастанию</p>
               <div class="tab">
                 <button class="tablinks" onclick="openTable(event, 'Groups')">Groups</button>
                 <button class="tablinks" onclick="openTable(event, 'Names')">Names</button>
               </div>
               <div id="Groups" class="tabcontent">
                 <h2 class="ns" style="text-align: center;">Groups</h2>
-                <table border='1' id="sorty">
-                    <tr><th onclick="sortn(0)">Ранг</th><th onclick="sort(1)">Название</th></tr>
+                <h2>Search in Table</h2>
+                <input type="text" id="searchInput1" onkeyup="searchTable('myTable1', 'searchInput1')" placeholder="Поиск в таблице">
+                <table border='1' id="myTable1">
+                    <tr><th onclick="sortTable('myTable1', 0)">Ранг</th><th onclick="sortTable('myTable1', 1)">Название</th></tr>
+                    <tbody>
                     <tr><td>1</td><td>The Semicolon Forgetters</td></tr>
                     <tr><td>2</td><td>Rising Stars</td></tr>
                     <tr><td>3</td><td>GatitoCatito</td></tr>
@@ -46,13 +128,15 @@
                     <tr><td>18</td><td>ImagineLosing</td></tr>
                     <tr><td>19</td><td>Winners</td></tr>
                     <tr><td>20</td><td>F2PKings</td></tr>
+                    </tbody>
                     </table>
               </div>
               
               <div id="Names" class="tabcontent">
                 <h2 class="ns" style="text-align: center;">Names</h3>
-                <table border='1' id="sorty1">
-                    <tr><th onclick="sort1(0)">Имя</th><th onclick="sortn1(1)">Возраст</th><th onclick="sort1(2)">Команда</th></tr>
+                  <input type="text" id="searchInput2" onkeyup="searchTable('myTable2', 'searchInput2')" placeholder="Поиск в таблице">
+                <table border='1' id="myTable2">
+                    <tr><th onclick="sortTable('myTable2', 0)">Имя</th><th onclick="sortTable('myTable2', 1)">Возраст</th><th onclick="sortTable('myTable2', 2)">Команда</th></tr>
                     <tr><td>Ахмет Ролан</td><td>16</td><td>The Semicolon Forgetters</td></tr>
                     <tr><td>Данияров Максат</td><td>18</td><td>WahhWahh</td></tr>
                     <tr><td>Сырымов Айторе</td><td>17</td><td>Синий Трактор</td></tr>
